@@ -85,7 +85,7 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        $post = Auth::user()->posts()->update([
+        Auth::user()->posts()->update([
             'title' => Str::title($request->title),
             'slug' => Str::slug($request->title),
             'description' => $request->description,
@@ -103,6 +103,8 @@ class PostController extends Controller
         }
 
         $post->hashtags()->sync($arrHashtagId);
+
+        return response()->json(['message' => 'Chỉnh sửa thành công!!!']);
     }
 
     /**

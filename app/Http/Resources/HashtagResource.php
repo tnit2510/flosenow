@@ -20,6 +20,7 @@ class HashtagResource extends JsonResource
             'slug' => route('hashtags.show', $this->slug),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
+            'posts' => PostResource::collection($this->whenLoaded('posts')),
         ];
     }
 }
