@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,4 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
 Route::group(['namespace' => 'Api'], function () {
     Route::apiResource('posts', 'PostController');
     Route::apiResource('hashtags', 'HashtagController');
-
 });

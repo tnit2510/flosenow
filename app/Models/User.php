@@ -17,6 +17,18 @@ class User extends Authenticatable implements JWTSubject
     const COVER_PATH  = '/users/covers/default.jpg';
     const BIO         = 'I Love Flosenow o((>ω< ))o';
 
+    protected $guard_name = 'api';
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
     /**
      * The attributes that are mass assignable.
      *

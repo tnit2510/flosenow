@@ -22,7 +22,6 @@ class HashtagController extends Controller
         $this->middleware('role_or_permission:administrator, super-moderator, moderator|create hashtags', ['only' => 'store']);
         $this->middleware('role_or_permission:administrator, super-moderator, moderator|edit hashtags', ['only' => 'update']);
         $this->middleware('role_or_permission:administrator, super-moderator, moderator|delete hashtags', ['only' => 'destroy']);
-
     }
 
     /**

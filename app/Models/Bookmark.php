@@ -10,6 +10,16 @@ class Bookmark extends Model
     use SoftDeletes;
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
