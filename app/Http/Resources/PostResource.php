@@ -22,7 +22,7 @@ class PostResource extends JsonResource
             'thumbnail' => config('app.url') . 'thumbnails/' . $this->thumbnail,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
-            'hashtags' => HashtagResource::collection($this->hashtags),
+            'hashtags' => HashtagResource::collection($this->whenLoaded('hashtags')),
         ];
     }
 }

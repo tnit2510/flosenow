@@ -29,7 +29,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(60);
+        $posts = Post::with(['hashtags' => function ($q) {
+            $q->paginate(20);
+        }])->paginate(60);
 
         return PostResource::collection($posts);
     }
