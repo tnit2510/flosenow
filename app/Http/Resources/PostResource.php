@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'slug' => route('posts.show', $this->slug),
             'description' => $this->description,
-            'thumbnail' => config('app.url') . 'thumbnails/' . $this->thumbnail,
+            'thumbnail' => public_path('thumbnails/' . $this->thumbnail),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
             'hashtags' => HashtagResource::collection($this->whenLoaded('hashtags')),

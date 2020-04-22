@@ -48,7 +48,7 @@ class PostController extends Controller
             'title' => Str::title($request->title),
             'slug' => Str::slug($request->title),
             'description' => $request->description,
-            'thumbnail' => $this->handleUploadedImage($request->thumbnail),
+            'thumbnail' => self::handleUploadedImage($request->thumbnail),
         ]);
 
         $hashtags = explode(', ', $request->hashtags);
@@ -88,9 +88,10 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         Auth::user()->posts()->update([
-            'title' => Str::title($request->title),
-            'slug' => Str::slug($request->title),
-            'description' => $request->description,
+            'title' => Str::title($request->title) ?? $post->title,
+            'slug' => Str::slug($request->title) ?? $post->slug,
+            'description' => $request->description ?? $post->description,
+            'thumbnail' => self::handleUploadedImage($request->thumbnail) ?? $post->thumbnail,
         ]);
 
         $hashtags = explode(', ', $request->hashtags);
@@ -122,14 +123,14 @@ class PostController extends Controller
         return response()->json(['message' => 'Xoá bài viết thành công!!!']);
     }
 
-    protected function handleUploadedImage($image)
+    public static function handleUploadedImage($image)
     {
         $name = Str::random(10) . time() . '.jpg';
 
         if (!is_null($image)) {
             $image->move(public_path('thumbnails'), $name);
-        }
 
-        return $name;
+            return $name;
+        }
     }
 }

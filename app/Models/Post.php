@@ -31,6 +31,11 @@ class Post extends Model
         'thumbnail',
     ];
 
+    public function advertise()
+    {
+        return $this->belongsTo(Advertise::class);
+    }
+
     public function bookmarks()
     {
         return $this->belongsToMany(Bookmark::class);

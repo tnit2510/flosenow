@@ -19,9 +19,9 @@ class HashtagController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['index', 'show']]);
-        $this->middleware('role_or_permission:administrator, super-moderator, moderator|create hashtags', ['only' => 'store']);
-        $this->middleware('role_or_permission:administrator, super-moderator, moderator|edit hashtags', ['only' => 'update']);
-        $this->middleware('role_or_permission:administrator, super-moderator, moderator|delete hashtags', ['only' => 'destroy']);
+        $this->middleware('role_or_permission:supervisor, moderator|create hashtags', ['only' => 'store']);
+        $this->middleware('role_or_permission:supervisor, moderator|edit hashtags', ['only' => 'update']);
+        $this->middleware('role_or_permission:supervisor, moderator|delete hashtags', ['only' => 'destroy']);
     }
 
     /**
@@ -75,8 +75,8 @@ class HashtagController extends Controller
     public function update(HashtagRequest $request, Hashtag $hashtag)
     {
         $hashtag->update([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
+            'name' => $request->name ?? $hashtag->name,
+            'slug' => Str::slug($request->name) ?? $hashtag->slug,
         ]);
 
         return response()->json(['message' => 'Sửa thành công!!!']);
@@ -92,6 +92,6 @@ class HashtagController extends Controller
     {
         $hashtag->delete();
 
-        return response()->json(['message' => 'Xoá hashtag thành công!!!']);
+        return response()->json(['message' => 'Xoá thành công!!!']);
     }
 }
