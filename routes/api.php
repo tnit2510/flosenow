@@ -27,4 +27,5 @@ Route::group(['namespace' => 'Api'], function () {
     Route::apiResource('anouncements', 'AnouncementController');
     Route::apiResource('hashtags', 'HashtagController');
     Route::apiResource('posts', 'PostController');
+    Route::apiResource('users', 'UserController');
 });
