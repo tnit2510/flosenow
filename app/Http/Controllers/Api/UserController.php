@@ -30,9 +30,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::paginate(60);
+        $users = User::paginate(60);
 
-        return UserResource::collection($user);
+        return UserResource::collection($users);
     }
 
     /**
@@ -43,13 +43,13 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $data = User::create([
+        $user = User::create([
             'username' => Str::lower($request->username),
             'password' => bcrypt($request->password),
             'email'    => $request->email,
         ]);
 
-        return new UserResource($data);
+        return new UserResource($user);
     }
 
     /**

@@ -19,8 +19,8 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'password' => $this->password,
             'email' => $this->email,
-            'avatars' => public_path('avatars/' . $this->avatars),
-            'covers' => public_path('covers/' . $this->covers),
+            'avatar' => public_path('avatars' . $this->avatar),
+            'cover' => public_path('covers' . $this->cover),
             'bio' => $this->bio,
         ];
     }

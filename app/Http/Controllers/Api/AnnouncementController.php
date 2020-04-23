@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use Str;
 use App\Http\Controllers\Controller;
-use App\Models\Anouncement;
+use App\Models\Announcement;
 use Illuminate\Http\Request;
-use App\Http\Resources\AnouncementResource;
+use App\Http\Resources\AnnouncementResource;
 
-class AnouncementController extends Controller
+class AnnouncementController extends Controller
 {
     /**
      * Create a new AuthController instance.
@@ -18,9 +18,9 @@ class AnouncementController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['index', 'show']]);
-        $this->middleware('role_or_permission:supervisor|create anouncements', ['only' => 'store']);
-        $this->middleware('role_or_permission:supervisor|edit anouncements', ['only' => 'update']);
-        $this->middleware('role_or_permission:supervisor|delete anouncements', ['only' => 'destroy']);
+        $this->middleware('role_or_permission:supervisor|create announcements', ['only' => 'store']);
+        $this->middleware('role_or_permission:supervisor|edit announcements', ['only' => 'update']);
+        $this->middleware('role_or_permission:supervisor|delete announcements', ['only' => 'destroy']);
     }
 
     /**
@@ -30,9 +30,9 @@ class AnouncementController extends Controller
      */
     public function index()
     {
-        $anouncements = Anouncement::paginate(30);
+        $announcements = Announcement::paginate(30);
 
-        return AnouncementResource::collection($anouncements);
+        return AnnouncementResource::collection($announcements);
     }
 
     /**
@@ -43,7 +43,7 @@ class AnouncementController extends Controller
      */
     public function store(Request $request)
     {
-        $anouncement = Anouncement::create([
+        $announcement = Announcement::create([
             'label' => $request->label,
             'title' => Str::title($request->title),
             'slug' => Str::slug($request->title),
@@ -51,35 +51,35 @@ class AnouncementController extends Controller
             'thumbnail' => PostController::handleUploadedImage($request->thumbnail),
         ]);
 
-        return new AnouncementResource($anouncement);
+        return new AnnouncementResource($announcement);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Anouncement  $anouncement
+     * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function show(Anouncement $anouncement)
+    public function show(Announcement $announcement)
     {
-        return new AnouncementResource($anouncement);
+        return new AnnouncementResource($announcement);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Anouncement  $anouncement
+     * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anouncement $anouncement)
+    public function update(Request $request, Announcement $announcement)
     {
-        $anouncement->update([
-            'label' => $request->label ?? $anouncement->label,
-            'title' => Str::title($request->title) ?? $anouncement->title,
-            'slug' => Str::slug($request->title) ?? $anouncement->slug,
-            'content' => $request->content ?? $anouncement->content,
-            'thumbnail' => PostController::handleUploadedImage($request->thumbnail) ?? $anouncement->thumbnail,
+        $announcement->update([
+            'label' => $request->label ?? $announcement->label,
+            'title' => Str::title($request->title) ?? $announcement->title,
+            'slug' => Str::slug($request->title) ?? $announcement->slug,
+            'content' => $request->content ?? $announcement->content,
+            'thumbnail' => PostController::handleUploadedImage($request->thumbnail) ?? $announcement->thumbnail,
         ]);
 
         return response()->json(['message' => 'Sửa thành công!!!']);
@@ -88,12 +88,12 @@ class AnouncementController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Anouncement  $anouncement
+     * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Anouncement $anouncement)
+    public function destroy(Announcement $announcement)
     {
-        $anouncement->delete();
+        $announcement->delete();
 
         return response()->json(['message' => 'Xóa thành công!!!']);
     }

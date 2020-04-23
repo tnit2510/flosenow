@@ -24,8 +24,12 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
 });
 
 Route::group(['namespace' => 'Api'], function () {
-    Route::apiResource('anouncements', 'AnouncementController');
+    Route::apiResource('announcements', 'AnnouncementController');
     Route::apiResource('hashtags', 'HashtagController');
+    Route::apiResource('pages', 'PageController');
+        Route::get('pages/{page}/posts', 'PageController@listPosts')->name('pages.list_post');
+        Route::post('pages/{page}/create', 'PageController@createPost')->name('pages.create_post');
     Route::apiResource('posts', 'PostController');
+    Route::apiResource('titles', 'TitleController');
     Route::apiResource('users', 'UserController');
 });

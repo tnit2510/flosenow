@@ -60,4 +60,9 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class, 'reactions')->withPivot('type');
     }
+
+    public function visits()
+    {
+        return visits($this);
+    }
 }

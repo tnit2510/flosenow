@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AdvertiseResource extends JsonResource
+class TitleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,9 @@ class AdvertiseResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            // 'posts' => new PostResource::collection($this->post_id),
-            'expiry_at' => $this->expiry_at->diffForHumans(),
+            'label' => $this->label,
+            'icon' => $this->icon,
+            'description' => $this->description,
         ];
     }
 }

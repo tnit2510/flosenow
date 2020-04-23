@@ -42,9 +42,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | Will count only one visit of an IP during this specified time.
+    | Custom: Will be reset ip after each minute.
     |
     */
-    'remember_ip' => 2 * 60,
+    'remember_ip' => 86400,
 
     /*
     |--------------------------------------------------------------------------

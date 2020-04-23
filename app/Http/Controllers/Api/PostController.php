@@ -75,6 +75,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->visits()->increment();
+
         return new PostResource($post);
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class AnnouncementResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,11 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'label' => $this->label,
             'title' => $this->title,
-            'slug' => route('posts.show', $this->slug),
-            'description' => $this->description,
+            'slug' => route('announcements.show', $this->slug),
+            'content' => $this->content,
             'thumbnail' => public_path('thumbnails' . $this->thumbnail),
-            'created_at' => $this->created_at->diffForHumans(),
-            'updated_at' => $this->updated_at->diffForHumans(),
-            'hashtags' => HashtagResource::collection($this->whenLoaded('hashtags')),
         ];
     }
 }
