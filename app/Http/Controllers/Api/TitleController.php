@@ -72,9 +72,9 @@ class TitleController extends Controller
     public function update(Request $request, Title $title)
     {
         $title->update([
-            'label' => $request->label ?? $title->label,
-            'description' => $request->description ?? $title->description,
-            'icon' => $request->icon ?? $title->icon,
+            'label' => $request->label,
+            'description' => $request->description,
+            'icon' => $request->icon,
         ]);
 
         return response()->json(['message' => 'Sửa thành công!!!']);

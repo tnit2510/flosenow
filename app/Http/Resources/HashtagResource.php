@@ -21,6 +21,7 @@ class HashtagResource extends JsonResource
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
             'posts' => PostResource::collection($this->whenLoaded('posts')),
+            'created_at' => $this->created_at->diffForHumans(),
         ];
     }
 }

@@ -73,9 +73,9 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $user->update([
-            'username' => Str::lower($request->username) ?? $user->username,
-            'password' => bcrypt($request->password) ?? $user->password,
-            'email'    => $request->email ?? $user->email,
+            'username' => Str::lower($request->username),
+            'password' => bcrypt($request->password),
+            'email'    => $request->email,
         ]);
 
         return response()->json(['message' => 'Sửa thành công!!!']);

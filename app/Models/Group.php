@@ -10,6 +10,9 @@ class Group extends Model
     use SoftDeletes;
 
     const COVER_PATH = '/groups/covers/default.jpg';
+    
+    const PRIVACY_ALL = 0;
+    const PRIVACY_HIDE = 1;
 
     /**
      * Get the route key for the model.
@@ -30,6 +33,7 @@ class Group extends Model
         'name',
         'slug',
         'cover',
+        'privacy',
     ];
 
     /**
@@ -39,6 +43,7 @@ class Group extends Model
      */
     protected $attributes = [
         'cover' => self::COVER_PATH,
+        'privacy' => self::PRIVACY_ALL,
     ];
 
     public function posts()
@@ -49,5 +54,10 @@ class Group extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function visits()
+    {
+        return visits($this);
     }
 }

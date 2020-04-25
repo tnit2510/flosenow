@@ -16,7 +16,7 @@ class CreateGroupUserTable extends Migration
         Schema::create('group_user', function (Blueprint $table) {
             $table->foreignId('group_id');
             $table->foreignId('user_id');
-            $table->string('join_at');
+            $table->string('join_at')->nullable();
             $table->tinyInteger('role')->nullable();
 
             $table->foreign('group_id')->references('id')

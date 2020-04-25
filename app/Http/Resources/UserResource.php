@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'avatar' => public_path('avatars' . $this->avatar),
             'cover' => public_path('covers' . $this->cover),
             'bio' => $this->bio,
+            'created_at' => $this->created_at->diffForHumans(),
         ];
     }
 }

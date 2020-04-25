@@ -7,6 +7,7 @@ use Str;
 use App\Http\Controllers\Controller;
 use App\Models\Hashtag;
 use App\Models\Page;
+use App\Models\Post;
 use App\Http\Resources\PageResource;
 use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class PageController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['index', 'show', 'listPosts']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show', 'post', 'listPosts']]);
     }
 
     /**
@@ -65,6 +66,7 @@ class PageController extends Controller
             'slug' => Str::slug($request->title),
             'description' => $request->description,
             'thumbnail' => PostController::handleUploadedImage($request->thumbnail),
+            'privacy' => $request->privacy,
         ]);
 
         $hashtags = explode(', ', $request->hashtags);
@@ -92,6 +94,19 @@ class PageController extends Controller
     public function show(Page $page)
     {
         return new PageResource($page);
+    }
+
+    /**
+     * Display the post of page.
+     *
+     * @param  \App\Models\Page  $page
+     * @return App\Http\Resources\PageResource
+     */
+    public function post(Page $page, Post $post)
+    {
+        $post->visits()->increment();
+        
+        return new PostResource($post);
     }
 
     /**

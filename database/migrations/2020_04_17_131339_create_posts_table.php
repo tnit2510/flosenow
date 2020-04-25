@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('thumbnail');
+            $table->tinyInteger('privacy')->nullable();
             $table->morphs('postable');
             $table->timestamps();
             $table->softDeletes();

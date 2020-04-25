@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,6 +17,8 @@ class User extends Authenticatable implements JWTSubject
     const AVATAR_PATH = '/users/avatars/default.jpg';
     const COVER_PATH  = '/users/covers/default.jpg';
     const BIO         = 'I Love Flosenow o((>ω< ))o';
+    const ROLE_GROUP  = 0;
+    const ROLE_PAGE   = 0;
 
     protected $guard_name = 'api';
 
@@ -100,7 +103,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function groups()
     {
-        return $this->belongsToMany(Group::class)->withPivot(['role', 'join_at']);
+        return $this->belongsToMany(Group::class)
+            ->withPivot([
+                'role',
+                'join_at',
+            ]);
     }
 
     public function messengers()
@@ -110,7 +117,8 @@ class User extends Authenticatable implements JWTSubject
 
     public function pages()
     {
-        return $this->belongsToMany(Page::class)->withPivot('role');
+        return $this->belongsToMany(Page::class)
+            ->withPivot('role');
     }
 
     public function posts()
@@ -120,6 +128,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function titles()
     {
-        return $this->belongsToMany(Title::class)->withPivot('receive_at');
+        return $this->belongsToMany(Title::class)
+            ->withPivot('receive_at');
     }
 }

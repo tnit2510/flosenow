@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AnnouncementResource extends JsonResource
+class GroupResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,11 @@ class AnnouncementResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'label' => $this->label,
-            'title' => $this->title,
-            'slug' => route('announcements.show', $this->slug),
-            'content' => $this->content,
-            'thumbnail' => public_path('thumbnails' . $this->thumbnail),
+            'name' => $this->name,
+            'slug' => route('groups.show', $this->slug),
+            'cover' => public_path('covers' . $this->cover),
+            'privacy' => $this->privacy == 0 ? 'Nhóm Công Khai' : 'Nhóm Riêng Tư',
+            'posts_count' => $this->posts->count(),
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }

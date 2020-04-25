@@ -75,8 +75,8 @@ class HashtagController extends Controller
     public function update(HashtagRequest $request, Hashtag $hashtag)
     {
         $hashtag->update([
-            'name' => $request->name ?? $hashtag->name,
-            'slug' => Str::slug($request->name) ?? $hashtag->slug,
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
         ]);
 
         return response()->json(['message' => 'Sửa thành công!!!']);

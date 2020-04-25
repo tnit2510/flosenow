@@ -9,6 +9,10 @@ class Post extends Model
 {
     use SoftDeletes;
 
+    const ALL = 0;
+    const ONLY_ME = 1;
+    const FOLLOW_ME = 2;
+
     /**
      * Get the route key for the model.
      *
@@ -29,6 +33,16 @@ class Post extends Model
         'slug',
         'description',
         'thumbnail',
+        'privacy',
+    ];
+
+    /**
+     * The attributes that should be set default value for field.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'privacy' => self::ALL,
     ];
 
     public function advertise()

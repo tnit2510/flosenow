@@ -75,11 +75,11 @@ class AnnouncementController extends Controller
     public function update(Request $request, Announcement $announcement)
     {
         $announcement->update([
-            'label' => $request->label ?? $announcement->label,
-            'title' => Str::title($request->title) ?? $announcement->title,
-            'slug' => Str::slug($request->title) ?? $announcement->slug,
-            'content' => $request->content ?? $announcement->content,
-            'thumbnail' => PostController::handleUploadedImage($request->thumbnail) ?? $announcement->thumbnail,
+            'label' => $request->label,
+            'title' => Str::title($request->title),
+            'slug' => Str::slug($request->title),
+            'content' => $request->content,
+            'thumbnail' => PostController::handleUploadedImage($request->thumbnail),
         ]);
 
         return response()->json(['message' => 'Sửa thành công!!!']);

@@ -18,6 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('cover')->nullable();
+            $table->tinyInteger('privacy')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

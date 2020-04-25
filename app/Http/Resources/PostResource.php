@@ -20,6 +20,14 @@ class PostResource extends JsonResource
             'slug' => route('posts.show', $this->slug),
             'description' => $this->description,
             'thumbnail' => public_path('thumbnails' . $this->thumbnail),
+            'views' => $this->visits()->count(),
+            'privacy' => $this->privacy == 0 
+                ? 'Công Khai' 
+                : (
+                    $this->privacy == 1 
+                        ? 'Chỉ Mình Tôi' 
+                        : 'Người Theo Dõi'
+                ),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
             'hashtags' => HashtagResource::collection($this->whenLoaded('hashtags')),

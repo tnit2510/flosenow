@@ -49,6 +49,7 @@ class PostController extends Controller
             'slug' => Str::slug($request->title),
             'description' => $request->description,
             'thumbnail' => self::handleUploadedImage($request->thumbnail),
+            'privacy' => $request->privacy,
         ]);
 
         $hashtags = explode(', ', $request->hashtags);
@@ -90,10 +91,11 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         Auth::user()->posts()->update([
-            'title' => Str::title($request->title) ?? $post->title,
-            'slug' => Str::slug($request->title) ?? $post->slug,
-            'description' => $request->description ?? $post->description,
-            'thumbnail' => self::handleUploadedImage($request->thumbnail) ?? $post->thumbnail,
+            'title' => Str::title($request->title),
+            'slug' => Str::slug($request->title),
+            'description' => $request->description,
+            'thumbnail' => self::handleUploadedImage($request->thumbnail),
+            'privacy' => $request->privacy,
         ]);
 
         $hashtags = explode(', ', $request->hashtags);
@@ -109,7 +111,7 @@ class PostController extends Controller
 
         $post->hashtags()->sync($arrHashtagId);
 
-        return response()->json(['message' => 'Chỉnh sửa thành công!!!']);
+        return response()->json(['message' => 'Sửa thành công!!!']);
     }
 
     /**
@@ -122,7 +124,7 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return response()->json(['message' => 'Xoá bài viết thành công!!!']);
+        return response()->json(['message' => 'Xoá thành công!!!']);
     }
 
     public static function handleUploadedImage($image)

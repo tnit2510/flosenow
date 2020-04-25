@@ -21,6 +21,7 @@ class PageResource extends JsonResource
             'avatar' => public_path('avatars' . $this->avatar),
             'cover' => public_path('covers' . $this->cover),
             'posts_count' => $this->posts->count(),
+            'created_at' => $this->created_at->diffForHumans(),
         ];
     }
 }

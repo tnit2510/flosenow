@@ -51,6 +51,11 @@ class Page extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('role');
+        return $this->belongsToMany(User::class);
+    }
+
+    public function visits()
+    {
+        return visits($this);
     }
 }
