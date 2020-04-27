@@ -1,11 +1,11 @@
 *
 !public/
-!public/groups/covers
-!public/pages/avatar
-!public/pages/covers
-!public/thumbnails
-!public/users/avatars
-!public/users/covers
+!public/groups/covers/
+!public/pages/avatar/
+!public/pages/covers/
+!public/thumbnails/
+!public/users/avatars/
+!public/users/covers/
 !.gitignore
 !.htaccess
 !favicon.ico
