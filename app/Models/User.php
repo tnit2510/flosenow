@@ -14,11 +14,9 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable, HasRoles, SoftDeletes;
 
-    const AVATAR_PATH = '/users/avatars/default.jpg';
-    const COVER_PATH  = '/users/covers/default.jpg';
+    const AVATAR_PATH = 'default.jpg';
+    const COVER_PATH  = 'default.jpg';
     const BIO         = 'I Love Flosenow o((>ω< ))o';
-    const ROLE_GROUP  = 0;
-    const ROLE_PAGE   = 0;
 
     protected $guard_name = 'api';
 
@@ -130,5 +128,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Title::class)
             ->withPivot('receive_at');
+    }
+
+    public function socialites()
+    {
+        return $this->hasMany(Socialite::class);
     }
 }

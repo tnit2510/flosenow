@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +15,17 @@ use App\Models\User;
 */
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('register', 'AuthController@register');
-    Route::post('me', 'AuthController@me');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
+    Route::post('login', 'AuthController@login')->name('users.login');
+    Route::post('register', 'AuthController@register')->name('users.register');
+    Route::post('me', 'AuthController@me')->name('users.me');
+    Route::post('logout', 'AuthController@logout')->name('users.logout');
+    Route::post('refresh', 'AuthController@refresh')->name('users.refresh');
+    Route::get('redirect/{provider}', 'SocialController@redirect');
+    Route::get('callback/{provider}', 'SocialController@callback');
 });
 
 Route::group(['namespace' => 'Api'], function () {
+    Route::get('home', 'HomeController')->name('home');
     Route::apiResource('announcements', 'AnnouncementController');
     Route::apiResource('groups', 'GroupController');
         Route::get('groups/{group}/posts', 'GroupController@listPosts')->name('groups.list_posts');

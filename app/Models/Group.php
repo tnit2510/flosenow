@@ -9,7 +9,7 @@ class Group extends Model
 {
     use SoftDeletes;
 
-    const COVER_PATH = '/groups/covers/default.jpg';
+    const COVER_PATH = 'default.jpg';
     
     const PRIVACY_ALL = 0;
     const PRIVACY_HIDE = 1;

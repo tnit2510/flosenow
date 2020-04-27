@@ -9,8 +9,8 @@ class Page extends Model
 {
     use SoftDeletes;
 
-    const AVATAR_PATH = '/pages/avatars/default.jpg';
-    const COVER_PATH = '/pages/covers/default.jpg';
+    const AVATAR_PATH = 'default.jpg';
+    const COVER_PATH = 'default.jpg';
 
     /**
      * Get the route key for the model.
