@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Auth;
 use Str;
 use App\Http\Controllers\Controller;
+use App\Models\Bookmark;
 use App\Models\Hashtag;
 use App\Models\Post;
 use App\Http\Resources\PostResource;
@@ -20,6 +21,20 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
+    /**
+     * Book mark post
+     * 
+     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Bookmark  $bookmark
+     * @return \Illuminate\Http\Response
+     */
+    public function bookmark(Post $post, Bookmark $bookmark)
+    {
+        $data = $post->bookmarks()->sync($bookmark);
+
+        return response()->json(['message' => 'Thêm bài viết thành công!']);
     }
 
     /**

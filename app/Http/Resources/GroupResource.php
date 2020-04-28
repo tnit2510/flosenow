@@ -18,7 +18,7 @@ class GroupResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => route('groups.show', $this->slug),
-            'cover' => public_path('covers' . $this->cover),
+            'cover' => config('app.url') . 'groups/covers/' . $this->cover,
             'privacy' => $this->privacy == 0 ? 'Nhóm Công Khai' : 'Nhóm Riêng Tư',
             'posts_count' => $this->posts->count(),
             'created_at' => $this->created_at->diffForHumans(),

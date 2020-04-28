@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'slug' => route('posts.show', $this->slug),
             'description' => $this->description,
-            'thumbnail' => public_path('thumbnails' . $this->thumbnail),
+            'thumbnail' => config('app.url') . 'thumbnails/' . $this->thumbnail,
             'views' => $this->visits()->count(),
             'privacy' => $this->privacy == 0 
                 ? 'Công Khai' 

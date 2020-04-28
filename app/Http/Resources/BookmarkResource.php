@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PageResource extends JsonResource
+class BookmarkResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +15,10 @@ class PageResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
             'name' => $this->name,
-            'slug' => route('pages.show', $this->slug),
-            'avatar' => config('app.url') . 'pages/avatars/' . $this->avatar,
-            'cover' => config('app.url') . 'pages/covers/' . $this->cover,
+            'slug' => route('bookmarks.show', $this->slug),
             'posts_count' => $this->posts->count(),
-            'created_at' => $this->created_at->diffForHumans(),
+            'posts' => PostResource::collection($this->whenLoaded('posts')),
         ];
     }
 }
