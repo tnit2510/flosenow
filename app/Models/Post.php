@@ -45,11 +45,6 @@ class Post extends Model
         'privacy' => self::ALL,
     ];
 
-    public function advertise()
-    {
-        return $this->belongsTo(Advertise::class);
-    }
-
     public function bookmarks()
     {
         return $this->belongsToMany(Bookmark::class);
@@ -70,9 +65,14 @@ class Post extends Model
         return $this->morphTo();
     }
 
+    public function reactions()
+    {
+        return $this->belongsToMany(ReactionType::class);
+    }
+
     public function users()
     {
-        return $this->belongsToMany(User::class, 'reactions')->withPivot('type');
+        return $this->belongsToMany(User::class);
     }
 
     public function visits()

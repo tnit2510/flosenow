@@ -18,7 +18,7 @@ class BookmarkResource extends JsonResource
             'name' => $this->name,
             'slug' => route('bookmarks.show', $this->slug),
             'posts_count' => $this->posts->count(),
-            'posts' => PostResource::collection($this->whenLoaded('posts')),
+            // 'posts' => PostResource::collection($this->whenLoaded('posts')),
         ];
     }
 }

@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(60);
+        $users = User::simplePaginate(60);
 
         return UserResource::collection($users);
     }

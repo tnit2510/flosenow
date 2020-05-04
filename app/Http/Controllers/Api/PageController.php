@@ -31,7 +31,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pages = Page::paginate(40);
+        $pages = Page::simplePaginate(40);
 
         return PageResource::collection($pages);
     }
@@ -66,7 +66,7 @@ class PageController extends Controller
             'slug' => Str::slug($request->title),
             'description' => $request->description,
             'thumbnail' => PostController::handleUploadedImage($request->thumbnail),
-            'privacy' => $request->privacy,
+            'privacy' => Post::ALL,
         ]);
 
         $hashtags = explode(', ', $request->hashtags);
@@ -83,6 +83,53 @@ class PageController extends Controller
         $post->hashtags()->sync($arrHashtagId);
 
         return new PostResource($post);
+    }
+
+    /**
+     * Edit post of page
+     * 
+     * @param  \App\Models\Page  $page
+     * @param  \App\Models\Post  $post
+     * @return App\Http\Resources\PageResource
+     */
+    public function editPost(Request $request, Page $page, Post $post)
+    {
+        $page->posts()->update([
+            'title' => Str::title($request->title) ?? $post->title,
+            'slug' => Str::slug($request->title) ?? $post->slug,
+            'description' => $request->description ?? $post->description,
+            'thumbnail' => PostController::handleUploadedImage($request->thumbnail) ?? $post->thumbnail,
+            'privacy' => Post::ALL ?? $post->privacy,
+        ]);
+
+        $hashtags = explode(', ', $request->hashtags);
+        $arrHashtagId = [];
+        foreach ($hashtags as $hashtag) {
+            $data = Hashtag::firstOrCreate([
+                'name' => $hashtag,
+                'slug' => Str::slug($hashtag),
+            ]);
+
+            $arrHashtagId[] = $data->id;
+        }
+
+        $post->hashtags()->sync($arrHashtagId);
+
+        return response()->json(['message' => 'Sửa thành công!!!']);
+    }
+
+    /**
+     * Delete post of page
+     * 
+     * @param  \App\Models\Page  $page
+     * @param  \App\Models\Post  $post
+     * @return App\Http\Resources\PageResource
+     */
+    public function deletePost(Page $page, Post $post)
+    {
+        $page->posts()->delete();
+
+        return response()->json(['message' => 'Xóa thành công!!!']);
     }
 
     /**
@@ -117,7 +164,7 @@ class PageController extends Controller
      */
     public function listPosts(Page $page)
     {
-        $posts = $page->posts()->paginate(40);
+        $posts = $page->posts()->simplePaginate(40);
 
         return PostResource::collection($posts);
     }

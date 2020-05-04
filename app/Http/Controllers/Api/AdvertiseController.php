@@ -29,7 +29,7 @@ class AdvertiseController extends Controller
      */
     public function index()
     {
-        $advertises = Advertise::paginate(40);
+        $advertises = Advertise::simplePaginate(40);
 
         return AdvertiseResource::collection($advertises);
     }

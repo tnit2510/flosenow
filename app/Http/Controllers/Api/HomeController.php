@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __invoke()
     {
-        $posts = Post::with(['hashtags'])->withCount('comments')->latest()->paginate(60);
+        $posts = Post::with(['hashtags'])->withCount('comments')->latest()->simplePaginate(60);
 
         return PostResource::collection($posts);
     }

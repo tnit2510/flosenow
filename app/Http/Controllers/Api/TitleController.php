@@ -29,7 +29,7 @@ class TitleController extends Controller
      */
     public function index()
     {
-        $titles = Title::paginate(60);
+        $titles = Title::simplePaginate(60);
 
         return TitleResource::collection($titles);
     }

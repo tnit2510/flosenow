@@ -24,7 +24,7 @@ class PostController extends Controller
     }
 
     /**
-     * Book mark post
+     * Bookmark post
      * 
      * @param  \App\Models\Post  $post
      * @param  \App\Models\Bookmark  $bookmark
@@ -38,6 +38,20 @@ class PostController extends Controller
     }
 
     /**
+     * Delete post of bookmark
+     * 
+     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Bookmark  $bookmark
+     * @return \Illuminate\Http\Response
+     */
+    public function bookmarkDeletePost(Post $post, Bookmark $bookmark)
+    {
+        $data = $post->bookmarks()->detach($bookmark);
+
+        return response()->json(['message' => 'Xóa bài viết thành công!']);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return App\Http\Resources\PostResource
@@ -45,8 +59,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['hashtags' => function ($q) {
-            $q->paginate(20);
-        }])->paginate(60);
+            $q->simplePaginate(20);
+        }])->simplePaginate(60);
 
         return PostResource::collection($posts);
     }
@@ -106,11 +120,11 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         Auth::user()->posts()->update([
-            'title' => Str::title($request->title),
-            'slug' => Str::slug($request->title),
-            'description' => $request->description,
-            'thumbnail' => self::handleUploadedImage($request->thumbnail),
-            'privacy' => $request->privacy,
+            'title' => Str::title($request->title) ?? $post->title,
+            'slug' => Str::slug($request->title) ?? $post->slug,
+            'description' => $request->description ?? $post->description,
+            'thumbnail' => self::handleUploadedImage($request->thumbnail) ?? $post->thumbnail,
+            'privacy' => $request->privacy ?? $post->privacy,
         ]);
 
         $hashtags = explode(', ', $request->hashtags);

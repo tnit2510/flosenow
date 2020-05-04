@@ -30,7 +30,7 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::paginate(30);
+        $announcements = Announcement::simplePaginate(30);
 
         return AnnouncementResource::collection($announcements);
     }

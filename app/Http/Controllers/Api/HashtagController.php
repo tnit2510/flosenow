@@ -32,8 +32,8 @@ class HashtagController extends Controller
     public function index()
     {
         $hashtags = Hashtag::with(['posts' => function ($q) {
-            $q->paginate(30);
-        }])->paginate(60);
+            $q->simplePaginate(30);
+        }])->simplePaginate(60);
 
         return HashtagResource::collection($hashtags);
     }

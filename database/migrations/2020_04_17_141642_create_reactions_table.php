@@ -16,7 +16,7 @@ class CreateReactionsTable extends Migration
         Schema::create('reactions', function (Blueprint $table) {
             $table->foreignId('post_id');
             $table->foreignId('user_id');
-            $table->tinyInteger('type');
+            $table->foreignId('reaction_type_id');
 
             $table->foreign('post_id')->references('id')
                 ->on('posts')
@@ -24,6 +24,10 @@ class CreateReactionsTable extends Migration
 
             $table->foreign('user_id')->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('reaction_type_id')->references('id')
+                ->on('reaction_types')
                 ->onDelete('cascade');
         });
     }

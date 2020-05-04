@@ -31,7 +31,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::paginate(40);
+        $groups = Group::simplePaginate(40);
 
         return GroupResource::collection($groups);
     }
@@ -54,39 +54,6 @@ class GroupController extends Controller
     }
 
     /**
-     * Store a newly post 
-     * 
-     * @param \App\Http\Requests\GroupRequest  $request
-     * @param \App\Models\Group  $group
-     * @return \App\Http\Resources\PostResource
-     */
-    public function createPost(GroupRequest $request, Group $group)
-    {
-        $post = $group->posts()->create([
-            'title' => Str::title($request->title),
-            'slug' => Str::slug($request->title),
-            'description' => $request->description,
-            'thumbnail' => PostController::handleUploadedImage($request->thumbnail),
-            'privacy' => $request->privacy,
-        ]);
-
-        $hashtags = explode(', ', $request->hashtags);
-        $arrHashtagId = [];
-        foreach ($hashtags as $hashtag) {
-            $data = Hashtag::firstOrCreate([
-                'name' => $hashtag,
-                'slug' => Str::slug($hashtag),
-            ]);
-
-            $arrHashtagId[] = $data->id;
-        }
-
-        $post->hashtags()->sync($arrHashtagId);
-
-        return new PostResource($post);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Group  $group
@@ -95,32 +62,6 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         return new GroupResource($group);
-    }
-
-    /**
-     * Display the post of group.
-     *
-     * @param  \App\Models\Group  $group
-     * @return App\Http\Resources\GroupResource
-     */
-    public function post(Group $group, Post $post)
-    {
-        $post->visits()->increment();
-        
-        return new PostResource($post);
-    }
-
-    /**
-     * Display list posts of group
-     * 
-     * @param  \App\Models\Group  $group
-     * @return App\Http\Resources\GroupResource
-     */
-    public function listPosts(Group $group)
-    {
-        $posts = $group->posts()->paginate(40);
-
-        return GroupResource::collection($posts);
     }
 
     /**

@@ -1,0 +1,43 @@
+Users:
+    Các chức năng thành viên sử dụng
+    ✔ Đăng bài cá nhân @done(20-05-03 19:34)
+    ☐ Đăng bài vô page
+    ☐ Đăng bài vô group
+    ☐ Yêu thích bài viết
+    ☐ Bình luận bài viết
+    ✔ Thêm vào lưu trữ @done(20-05-03 19:34)
+    ☐ Report
+    ☐ Xác thực 2FA
+    ☐ Nhắn tin
+    ✔ Tạo group @done(20-05-03 19:34)
+    ✔ Tạo page @done(20-05-03 19:34)
+    ☐ Kết bạn
+    ☐ Theo dõi
+    ☐ Danh hiệu
+    ☐ Xu hương nổi bật
+    ☐ Bật thông báo
+    ☐ Login with fb
+Groups:
+    Chức năng dành cho người tạo group
+    ✔ Tạo group @done(20-05-03 19:34)
+    ✔ Sửa group @done(20-05-03 19:34)
+    ✔ Xóa group @done(20-05-03 19:34)
+    ☐ Liên kết vs page
+
+Pages:
+    Chức năng dành cho người tạo page
+    ✔ Tạo page @done(20-05-03 19:34)
+    ✔ Sửa page @done(20-05-03 19:34)
+    ✔ Xoá page @done(20-05-03 19:34)
+    ✔ Đăng bài @done(20-05-03 19:34)
+
+Admin:
+    Administrator
+    ☐ Gửi thông báo
+    ☐ Tạo quảng cáo
+    ☐ Quản lý report
+
+Mod:
+    Moderator
+    ☐ Quản lý bài đăng
+    ☐ Quản lý report

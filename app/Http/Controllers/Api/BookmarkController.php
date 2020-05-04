@@ -28,7 +28,7 @@ class BookmarkController extends Controller
      */
     public function index()
     {
-        $bookmarks = Auth::user()->bookmarks()->paginate(40);
+        $bookmarks = Auth::user()->bookmarks()->simplePaginate(40);
 
         return BookmarkResource::collection($bookmarks);
     }
@@ -58,8 +58,8 @@ class BookmarkController extends Controller
     public function show(Bookmark $bookmark)
     {
         $data = Auth::user()->bookmarks()->with(['posts' => function ($q) {
-            $q->paginate(40);
-        }])->paginate(40);
+            $q->simplePaginate(40);
+        }])->simplePaginate(40);
 
         return new BookmarkResource($bookmark);
     }
